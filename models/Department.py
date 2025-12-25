@@ -1,10 +1,7 @@
 # Department Model class / DB Entity Class
 
-# Here call name is representing Department Table name in the database
-# Each attribute is representing each column of the Department Table in the database
-
-class Department:
-    def __init__(self, deptNo, dname, location):
-        self.deptNo = deptNo
-        self.dname = dname
+class Departments:
+    def __init__(self, dep_id, dep_name, location):
+        self.dep_id = dep_id
+        self.dep_name = dep_name
         self.location = location

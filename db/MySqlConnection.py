@@ -5,8 +5,8 @@ class MySqlConnection:
         self.connection = mysqlConn.connect(
             host='localhost',
             user='root',
-            password='password',
-            database='companydb'
+            password='12345678',
+            database='company'
         )
 
     def get_connection(self):

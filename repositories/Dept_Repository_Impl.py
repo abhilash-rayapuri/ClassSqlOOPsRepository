@@ -1,33 +1,34 @@
-from repositories.Dept_Repository import DeptRepository 
+from Dept_Repository import DeptRepository
 
 class DeptRepositoryImpl(DeptRepository):   
     def __init__(self, connection):
         self.connection = connection
         
-    def insert_department(self, department):
+    def insert_department(self, departments):
         cursor = self.connection.cursor()
-        insert_query = "INSERT INTO Department (DeptNo, Dname, Location) VALUES (%s, %s, %s)"
+        insert_query = "INSERT INTO Department (Dep_id, Dep_name, Location) VALUES (%s, %s, %s)"
         try:
-            cursor.execute(insert_query, (department.deptNo, department.dname, department.location))
+            cursor.execute(insert_query, (departments.dep_id, departments.dep_name, departments.location))
             self.connection.commit() # Commit the transaction to save changes        
             print("Department record inserted successfully.")
         except Exception as e:
             print(f"Error inserting record: {e}")
         finally:
             cursor.close()
+            self.connection.close()
 
-    def update_department(self, department):        
+    def update_department(self, departments):
         cursor = self.connection.cursor()
         update_fields = []
         params = []
-        if department.dname:
-            update_fields.append("Dname = %s")
-            params.append(department.dname)
-        if department.location:
+        if departments.dname:
+            update_fields.append("dep_name = %s")
+            params.append(departments.dep_name)
+        if departments.location:
             update_fields.append("Location = %s")
-            params.append(department.location)
-        params.append(department.deptNo)  # For the WHERE clause    
-        update_query = f"UPDATE Department SET {', '.join(update_fields)} WHERE DeptNo = %s"
+            params.append(departments.location)
+        params.append(departments.dep_id)  # For the WHERE clause
+        update_query = f"UPDATE Departments SET {', '.join(update_fields)} WHERE Dep_id = %s"
         try:
             cursor.execute(update_query, tuple(params))
             self.connection.commit() # Commit the transaction to save changes        
@@ -36,22 +37,24 @@ class DeptRepositoryImpl(DeptRepository):
             print(f"Error updating record: {e}")
         finally:
             cursor.close()
+            self.connection.close()
 
-    def delete_department(self, deptNo):
+    def delete_department(self, dep_id):
         cursor = self.connection.cursor()
-        delete_query = "DELETE FROM Department WHERE DeptNo = %s"
+        delete_query = "DELETE FROM Departments WHERE DeptNo = %s"
         try:
-            cursor.execute(delete_query, (deptNo,))
+            cursor.execute(delete_query, (dep_id,))
             self.connection.commit() # Commit the transaction to save changes        
             print("Department record deleted successfully.")
         except Exception as e:
             print(f"Error deleting record: {e}")
         finally:
             cursor.close()
+            self.connection.close()
 
     def get_all_departments(self):
         cursor = self.connection.cursor()
-        select_query = "SELECT * FROM Department"
+        select_query = "SELECT * FROM Departments"
         try:
             cursor.execute(select_query)
             deptList = cursor.fetchall()
@@ -61,12 +64,13 @@ class DeptRepositoryImpl(DeptRepository):
             return []
         finally:
             cursor.close()
+            self.connection.close()
 
-    def get_department_by_deptNo(self, deptNo):
+    def get_department_by_deptNo(self, dep_id):
         cursor = self.connection.cursor()
-        select_query = "SELECT * FROM Department WHERE DeptNo = %s"
+        select_query = "SELECT * FROM Departments WHERE Dep_id = %s"
         try:
-            cursor.execute(select_query, (deptNo,))
+            cursor.execute(select_query, (dep_id,))
             dept = cursor.fetchone()
             return dept
         except Exception as e:
@@ -74,12 +78,13 @@ class DeptRepositoryImpl(DeptRepository):
             return None
         finally:
             cursor.close()
+            self.connection.close()
 
-    def get_departments_by_dname(self, dname):
+    def get_departments_by_dname(self, dep_name):
         cursor = self.connection.cursor()
-        select_query = "SELECT * FROM Department WHERE Dname = %s"
+        select_query = "SELECT * FROM Departments WHERE Dep_name = %s"
         try:
-            cursor.execute(select_query, (dname,))
+            cursor.execute(select_query, (dep_name,))
             deptList = cursor.fetchall()
             return deptList
         except Exception as e:
@@ -87,3 +92,4 @@ class DeptRepositoryImpl(DeptRepository):
             return []
         finally:
             cursor.close()
+            self.connection.close()

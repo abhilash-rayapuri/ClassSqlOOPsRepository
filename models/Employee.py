@@ -1,12 +1,9 @@
 # Employee Model class / DB Entity Class
 
-# Here call name is representing Employee Table name in the database
-# Each attribute is representing each column of the Employee Table in the database
-
-class Employee:
-    def __init__(self, empId, ename, password, gender, dob, phone, email, salary, address, deptNo):
-        self.empId = empId
-        self.ename = ename
+class Employees:
+    def __init__(self, emp_id, emp_name, password, gender, dob, phone, email, salary, address, dep_id):
+        self.emp_id = emp_id
+        self.emp_name = emp_name
         self.password = password
         self.gender = gender
         self.dob = dob
@@ -14,4 +11,4 @@ class Employee:
         self.email = email
         self.salary = salary
         self.address = address
-        self.deptNo = deptNo
+        self.dep_id = dep_id
