@@ -3,11 +3,11 @@ from abc import ABC, abstractmethod
 # Abstract Base Class for Department Repository
 class DeptRepository(ABC):
     @abstractmethod
-    def insert_department(self, departments):
+    def insert_department(self, Departments):
         pass
 
     @abstractmethod
-    def update_department(self, departments):
+    def update_department(self, Departments):
         pass
 
     @abstractmethod

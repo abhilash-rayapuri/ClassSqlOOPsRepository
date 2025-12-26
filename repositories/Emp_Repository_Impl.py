@@ -1,13 +1,13 @@
-from Emp_Repository import EmpRepository
+from .Emp_Repository import EmpRepository
 
 class EmpRepositoryImpl(EmpRepository):
     def __init__(self, connection):
         self.connection = connection
 
-    def insert_employee(self, db_name, Employees):
+    def insert_employee(self, Employees):
         cursor = self.connection.cursor()
         insert_query = """INSERT INTO Employees
-                              (Emp_Id, Emp_name, Password, Gender, Dob, Phone, Email, Salary, Address, Dept_id) 
+                              (Emp_Id, Emp_name, Password, Gender, Dob, Phone, Email, Salary, Address, Dep_id) 
                               VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
         try:
             cursor.execute(insert_query,
@@ -18,7 +18,7 @@ class EmpRepositoryImpl(EmpRepository):
             print(f"Error inserting record: {e}")
         finally:
             cursor.close()
-            self.connection.close()
+            
 
     def update_employee(self, db_name, Employees):
         cursor = self.connection.cursor()
@@ -61,9 +61,8 @@ class EmpRepositoryImpl(EmpRepository):
             print(f"Error updating record: {e}")
         finally:
             cursor.close()
-            self.connection.close()
 
-    def delete_department(self, emp_id):
+    def delete_employee(self, emp_id):
         cursor = self.connection.cursor()
         delete_query = "DELETE FROM Employees WHERE emp_id = %s"
         try:
@@ -74,9 +73,8 @@ class EmpRepositoryImpl(EmpRepository):
             print(f"Error deleting record: {e}")
         finally:
             cursor.close()
-            self.connection.close()
-
-    def fetch_all_employees(self, db_name, employees):
+            
+    def get_all_employees(self, employees):
         cursor = self.connection.cursor()
         select_query = "SELECT * FROM Employees"
         try:
@@ -88,9 +86,8 @@ class EmpRepositoryImpl(EmpRepository):
             return []
         finally:
             cursor.close()
-            self.connection.close()
 
-    def fetch_employee_by_id(self, db_name, emp_id):
+    def get_employee_by_empId(self, emp_id):
         cursor = self.connection.cursor()
         select_query = "SELECT * FROM Employees WHERE emp_id = %s"
         try:
@@ -102,9 +99,8 @@ class EmpRepositoryImpl(EmpRepository):
             return None
         finally:
             cursor.close()
-            self.connection.close()
 
-    def fetch_employees_by_dept(self, db_name, dep_id):
+    def get_employees_by_dept(self, dep_id):
         cursor = self.connection.cursor()
         select_query = "SELECT * FROM Employees WHERE Dep_id = %s"
         try:
@@ -116,9 +112,8 @@ class EmpRepositoryImpl(EmpRepository):
             return []
         finally:
             cursor.close()
-            self.connection.close()
 
-    def fetch_employees_by_gender(self, db_name, Gender):
+    def get_employees_by_gender(self, Gender):
         cursor = self.connection.cursor()
         select_query = "SELECT * FROM Employees WHERE Gender = %s"
         try:
@@ -130,9 +125,8 @@ class EmpRepositoryImpl(EmpRepository):
             return []
         finally:
             cursor.close()
-            self.connection.close()
 
-    def fetch_employees_order_by_salary(self, db_name, ascending=True):
+    def get_employees_order_by_salary(self, ascending=True):
         cursor = self.connection.cursor()
         order = "DESC" if not ascending else "ASC"
         select_query = f"SELECT * FROM Employees ORDER BY Salary {order}"
@@ -145,4 +139,3 @@ class EmpRepositoryImpl(EmpRepository):
             return []
         finally:
             cursor.close()
-            self.connection.close()

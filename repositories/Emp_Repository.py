@@ -3,26 +3,26 @@ from abc import ABC, abstractmethod
 # Abstract Base Class for Department Repository
 class EmpRepository(ABC):
     @abstractmethod
-    def insert_employee(self,db_name, Employees):
+    def insert_employee(self, Employees):
         pass
     @abstractmethod
-    def update_employee(self,db_name, Employees):
+    def update_employee(self, Employees):
         pass
     @abstractmethod
-    def delete_employee(self,db_name, emp_id):
+    def delete_employee(self, emp_id):
         pass
     @abstractmethod
-    def fetch_all_employees(self,db_name, Employees):
+    def get_all_employees(self, Employees):
         pass
     @abstractmethod
-    def fetch_employee_by_id(self,db_name, emp_id):
+    def get_employee_by_empId(self, emp_id):
         pass
     @abstractmethod
-    def fetch_employees_by_dept(self,db_name, dep_id):
+    def get_employees_by_dept(self, dep_id):
         pass
     @abstractmethod
-    def fetch_employees_by_gender(self,db_name, Gender):
+    def get_employees_by_gender(self, Gender):
         pass
     @abstractmethod
-    def fetch_employees_order_by_salary(self,db_name, ascending=True):
+    def get_employees_order_by_salary(self, ascending=True):
         pass

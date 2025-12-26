@@ -1,4 +1,4 @@
-from Dept_Repository import DeptRepository
+from .Dept_Repository import DeptRepository
 
 class DeptRepositoryImpl(DeptRepository):   
     def __init__(self, connection):
@@ -15,7 +15,6 @@ class DeptRepositoryImpl(DeptRepository):
             print(f"Error inserting record: {e}")
         finally:
             cursor.close()
-            self.connection.close()
 
     def update_department(self, departments):
         cursor = self.connection.cursor()
@@ -37,7 +36,6 @@ class DeptRepositoryImpl(DeptRepository):
             print(f"Error updating record: {e}")
         finally:
             cursor.close()
-            self.connection.close()
 
     def delete_department(self, dep_id):
         cursor = self.connection.cursor()
@@ -50,7 +48,6 @@ class DeptRepositoryImpl(DeptRepository):
             print(f"Error deleting record: {e}")
         finally:
             cursor.close()
-            self.connection.close()
 
     def get_all_departments(self):
         cursor = self.connection.cursor()
@@ -64,7 +61,7 @@ class DeptRepositoryImpl(DeptRepository):
             return []
         finally:
             cursor.close()
-            self.connection.close()
+
 
     def get_department_by_deptNo(self, dep_id):
         cursor = self.connection.cursor()
@@ -78,7 +75,6 @@ class DeptRepositoryImpl(DeptRepository):
             return None
         finally:
             cursor.close()
-            self.connection.close()
 
     def get_departments_by_dname(self, dep_name):
         cursor = self.connection.cursor()
@@ -92,4 +88,3 @@ class DeptRepositoryImpl(DeptRepository):
             return []
         finally:
             cursor.close()
-            self.connection.close()
